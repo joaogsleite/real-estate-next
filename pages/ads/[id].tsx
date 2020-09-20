@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
 
 import { Ad } from '../../interfaces/ad'
-import { adsData } from '../../utils/ads-data'
+import { getAds } from '../../utils/ads-data'
 import Layout from '../../components/Layout'
 import ListDetail from '../../components/ListDetail'
 
@@ -36,6 +36,7 @@ export default StaticPropsDetail
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the paths we want to pre-render based on ads
+  const adsData = await getAds()
   const paths = adsData.map((item) => ({
     params: { id: item.id },
   }))
@@ -51,6 +52,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const id = params?.id
+    const adsData = await getAds()
     const item = adsData.find((item) => item.id === id)
     // By returning { props: item }, the StaticPropsDetail component
     // will receive `item` as a prop at build time

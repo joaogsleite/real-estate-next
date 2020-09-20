@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { adsData } from '../../../utils/ads-data'
+import { getAds } from '../../../utils/ads-data'
 
-const handler = (_req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
+    const adsData = await getAds()
     if (!Array.isArray(adsData)) {
       throw new Error('Cannot find ads data')
     }

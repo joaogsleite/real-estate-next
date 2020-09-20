@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 
 import { Ad } from '../../interfaces/ad'
-import { adsData } from '../../utils/ads-data'
+import { getAds } from '../../utils/ads-data'
 import Layout from '../../components/Layout'
 import List from '../../components/List'
 import { useCallback, FormEvent, useState } from 'react'
@@ -47,6 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
+  const adsData = await getAds()
   const items: Ad[] = adsData
   return { props: { items } }
 }

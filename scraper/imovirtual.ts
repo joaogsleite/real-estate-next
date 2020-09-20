@@ -10,7 +10,7 @@ const xray = Xray({
       return value.split(': ')[1].split(', ')[index]
     },
     id: (value: string) => {
-      return value.split('#')[1]
+      return 'ID' + value.split('-ID')[1].split('.html')[0]
     }
   },
 })

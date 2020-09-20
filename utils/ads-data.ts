@@ -1,18 +1,19 @@
 import { Ad } from '../interfaces/ad'
-import fs from 'fs'
+import { promises as fs } from 'fs'
 
 const ads: Ad[] = []
 
-const files = fs.readdirSync('data/')
-const latestDate = files[0].substring(0, 8)
-
-const CONCELHOS = ['mafra', 'sintra', 'cascais', 'oeiras', 'amadora']
-for (const concelho of CONCELHOS) {
-  const contents = fs.readFileSync(`data/${latestDate}.${concelho}.imovirtual.json`, 'utf-8') as string
-  (JSON.parse(contents) as Ad[]).forEach((ad) => {
-    ads.push(ad)
-  })
+export async function getAds() {
+  if (ads.length === 0) {
+    const files = await fs.readdir('data/')
+    const latestDate = files[0].substring(0, 8)
+    const CONCELHOS = ['mafra', 'sintra', 'cascais', 'oeiras', 'amadora']
+    for (const concelho of CONCELHOS) {
+      const contents = await fs.readFile(`data/${latestDate}.${concelho}.imovirtual.json`, 'utf-8') as string
+      (JSON.parse(contents) as Ad[]).forEach((ad) => {
+        ads.push(ad)
+      })
+    }
+  }
+  return ads
 }
-
-/** Ads data. */
-export const adsData = ads
