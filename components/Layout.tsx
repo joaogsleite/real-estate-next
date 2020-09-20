@@ -20,20 +20,15 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           <a>Home</a>
         </Link>{' '}
         |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
         <Link href="/ads">
           <a>Ads List</a>
         </Link>{' '}
-        | <a href="/api/ads">Ads API</a>
       </nav>
     </header>
     {children}
     <footer>
       <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>Footer</span>
     </footer>
   </div>
 )
